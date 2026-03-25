@@ -1,6 +1,7 @@
 # DECISIONS.md — Decisões Arquiteturais
 
 Este documento registra as decisões tomadas ao longo do projeto, com alternativas descartadas e o contexto de cada escolha.
+Paradesenvolver de forma organizada, o projeto foi separado por etapas entregáveis, para poder avaliar o andamento do projeto.
 
 ---
 
@@ -121,21 +122,3 @@ O `react-hook-form` mantém os valores registrados no store interno. Quando o te
 **Sintoma visível se tivesse usado `key={templateId}`:** o formulário inteiro seria desmontado e remontado a cada troca de template. O usuário perderia todos os valores preenchidos, o foco seria resetado para o início da página, e campos em comum entre templates começariam vazios. Isso é o oposto do comportamento esperado pelo desafio.
 
 ---
-
-## Module Federation
-
-> Seção a ser preenchida na Etapa 3.
-
-**Perguntas obrigatórias a responder:**
-- O que acontece, passo a passo, se o remote carrega com uma versão de `react` diferente da registrada como `requiredVersion` no shell?
-- Se fosse necessário adicionar um segundo remote, o que mudaria na configuração atual?
-
----
-
-## Estado e Conflito
-
-> Seção a ser preenchida na Etapa 4.
-
-**Perguntas obrigatórias a responder:**
-- Qual o estado exato do store no momento em que um `approve` retorna 409 — antes, durante e após o rollback?
-- Por que foi escolhida a estratégia de multi-tab awareness e não outra?
