@@ -1,0 +1,29 @@
+{
+  "name": "approval-workflow",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"no root tests\" && exit 0",
+    "lint": "eslint . --ext .ts,.tsx",
+    "prepare": "husky"
+  },
+  "workspaces": [
+    "shell",
+    "remote-workflow"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0",
+  "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "typescript-eslint": "^8.57.2"
+  }
+}

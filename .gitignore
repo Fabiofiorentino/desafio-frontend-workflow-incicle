@@ -1,0 +1,48 @@
+# Dependências
+node_modules/
+.pnpm-store/
+
+# Build / dist
+dist/
+build/
+.out/
+coverage/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ambiente
+.env
+.env.*
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Git hooks (se não quiser versionar)
+.husky/_
+
+# Cache
+.cache/
+.tmp/
+
+# Arquivos de pacote (opcional - normalmente versiona)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Monorepo (caso tenha builds internos)
+**/dist/
+**/build/
+**/node_modules/
