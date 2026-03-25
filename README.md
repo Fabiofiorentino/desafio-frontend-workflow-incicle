@@ -14,8 +14,6 @@ approval-workflow/
   pnpm-workspace.yaml
   README.md
   DECISIONS.md
-  KNIP-REPORT.md
-  BUNDLE-REPORT.html
 ```
 
 ---
@@ -24,19 +22,24 @@ approval-workflow/
 
 > Pré-requisitos: Node >= 18, pnpm instalado globalmente (`npm install -g pnpm`)
 
-```bash
 # 1. Clonar o repositório
+```bash
 git clone <url-do-repo>
 cd approval-workflow
-
+```
 # 2. Instalar dependências
+```bash
 pnpm install
+```
 
 # 3. Configurar variáveis de ambiente
+```bash
 cp shell/.env.example shell/.env
 cp remote-workflow/.env.example remote-workflow/.env
+```
 
 # 4. Rodar os dois apps
+```bash
 # Terminal 1
 cd shell && pnpm dev
 
@@ -46,48 +49,34 @@ cd remote-workflow && pnpm dev
 
 O shell roda em `http://localhost:5173` e o remote em `http://localhost:5174`.
 
-**Tempo estimado do clone ao primeiro `pnpm dev`: ~3 minutos.**
-
 ---
 
-## Variáveis de Ambiente
+# Telas
 
-### shell/.env.example
-```
-VITE_API_URL=http://localhost:3000
-VITE_USE_MOCK=true
-VITE_APP_PORT=5173
-VITE_REMOTE_WORKFLOW_URL=http://localhost:5174
-```
+| Rota | Descrição |
+|---|---|
+| `/approvals/inbox` | Lista virtualizada de 10k aprovações pendentes com SLA em tempo real |
+| `/instances/:id` | Detalhe com etapas (visual por status) e timeline cronológica |
+| `/instances/new` | Formulário dinâmico gerado a partir do schema do template selecionado |
+| `/delegations` | Listagem, criação e cancelamento de delegações com detecção visual de ciclo |
 
-### remote-workflow/.env.example
-```
-VITE_API_URL=http://localhost:3000
-VITE_USE_MOCK=true
-VITE_APP_PORT=5174
-```
+## Acessar as telas
 
-> O arquivo `.env` nunca é commitado. Apenas o `.env.example` vai ao repositório.
+[approvals/Inbox](http://localhost:5174/approvals/inbox)
+
+[intances/:id](http://localhost:5174/instances/inst-1)
+
+[instances/new](http://localhost:5174/instances/new)
+
+[delegations](http://localhost:5174/delegations)
+
+**Tempo estimado do clone ao primeiro `pnpm dev`: ~3 minutos.**
 
 ---
 
 ## Estratégia de Mock
 
 O mock é feito com **MSW (Mock Service Worker)**. Ele intercepta requisições HTTP no nível do Service Worker do browser, sem modificar nenhum código de chamada de API.
-
-### Como o mock é ativado
-
-```ts
-// remote-workflow/src/mocks/index.ts
-export async function startMocks(): Promise<void> {
-  if (import.meta.env.VITE_USE_MOCK !== 'true') return
-
-  const { worker } = await import('./browser')
-  await worker.start({ onUnhandledRequest: 'bypass' })
-}
-```
-
-O `import('./browser')` é **dinâmico**. Quando `VITE_USE_MOCK=false`, o Vite não inclui o MSW nem os handlers no bundle de produção — o tree-shaking elimina o import inteiro. O código de produção nunca sabe que o MSW existe.
 
 ### Estrutura dos mocks
 
@@ -121,17 +110,6 @@ Fixtures estáticas (JSON importado direto) não permitem simular comportamentos
 
 ---
 
-## Telas
-
-| Rota | Descrição |
-|---|---|
-| `/approvals/inbox` | Lista virtualizada de 10k aprovações pendentes com SLA em tempo real |
-| `/instances/:id` | Detalhe com etapas (visual por status) e timeline cronológica |
-| `/instances/new` | Formulário dinâmico gerado a partir do schema do template selecionado |
-| `/delegations` | Listagem, criação e cancelamento de delegações com detecção visual de ciclo |
-
----
-
 ## Performance
 
 > Métricas a serem medidas após o build de produção com `rollup-plugin-visualizer`.
@@ -158,9 +136,6 @@ Fixtures estáticas (JSON importado direto) não permitem simular comportamentos
 ## Identidade Visual e Estilização
 
 O projeto utiliza uma abordagem moderna de Atomic Design com foco em densidade de informações e performance, ideal para ferramentas corporativas de workflow.
-
-
-
 
 
 ### Stack de Estilo
